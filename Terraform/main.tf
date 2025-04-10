@@ -30,7 +30,7 @@ resource "azurerm_resource_group" "rg" {
 
 # Use VM Module
 module "azure_vms" {
-  source              = "./modules/vm"
+  source              = "./modules/VM"
   cluster_name        = var.cluster_name
   resource_group_name = azurerm_resource_group.rg.name
   location            = var.location
