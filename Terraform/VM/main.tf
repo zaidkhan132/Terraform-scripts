@@ -30,7 +30,7 @@ resource "azurerm_network_interface" "vm_nic" {
 
   ip_configuration {
     name                          = "internal"
-    subnet_id                     = azurerm_subnet.subnet.id
+    subnet_id                     = azurerm_subnet.subnet.id # Ensure `azurerm_subnet.subnet` exists and is properly referenced
     private_ip_address_allocation = "Dynamic"
   }
 
@@ -48,7 +48,7 @@ resource "azurerm_virtual_machine" "vm" {
     azurerm_network_interface.vm_nic[count.index].id
   ]
 
-  vm_size = "Standard_B2ms"
+  vm_size = "Standard_B2ms" # Update VM size based on requirements
 
   storage_os_disk {
     name              = "${var.cluster_name}-osdisk-${count.index}"
@@ -59,8 +59,8 @@ resource "azurerm_virtual_machine" "vm" {
 
   os_profile {
     computer_name  = "${var.cluster_name}-vm-${count.index}"
-    admin_username = "azureuser"
-    admin_password = "Password1234!"
+    admin_username = var.admin_username # Use variables for credentials
+    admin_password = var.admin_password # Use variables for credentials
   }
 
   os_profile_linux_config {
