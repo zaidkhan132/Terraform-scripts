@@ -1,8 +1,15 @@
+# General Variables
 variable "resource_group_name" {
   description = "Name of the Azure Resource Group"
   type        = string
 }
 
+variable "location" {
+  description = "Azure region for resources"
+  type        = string
+}
+
+# Backend Configuration Variables
 variable "storage_account_name" {
   description = "Name of the Azure Storage Account for backend state"
   type        = string
@@ -13,14 +20,17 @@ variable "container_name" {
   type        = string
 }
 
+# Azure Authentication Variables
 variable "arm_client_id" {
   description = "Azure Service Principal Client ID"
   type        = string
+  sensitive   = true
 }
 
 variable "arm_client_secret" {
   description = "Azure Service Principal Client Secret"
   type        = string
+  sensitive   = true
 }
 
 variable "arm_subscription_id" {
@@ -33,13 +43,9 @@ variable "arm_tenant_id" {
   type        = string
 }
 
+# Virtual Machine Variables
 variable "cluster_name" {
-  description = "Cluster name"
-  type        = string
-}
-
-variable "location" {
-  description = "Azure region for resources"
+  description = "Cluster name for virtual machines"
   type        = string
 }
 
@@ -49,6 +55,7 @@ variable "node_count" {
   default     = 1
 }
 
+# Network Security Group (NSG) Rules
 variable "nsg_rules" {
   description = "List of NSG rules"
   type = list(object({
